@@ -9,6 +9,15 @@
 --Brown-neutral: hsl(30, 10%, 34%);
 --DarkCharcoal-neutral: hsl(24, 5%, 18%);
 
+--ForestGreen: hsl(138, 100%, 25%);
+--LightYellow: hsl(67, 100%, 87%);
+--DarkGreen: hsl(137, 100%, 16%);
+--White-neutral: hsl(0, 0%, 100%);
+--DarkCharcoal-neutral: hsl(24, 5%, 18%);
+--Eggshell-neutral: hsl(30, 54%, 90%);
+
+
+
 --ff-top: "Young Serif", serif;
 --ff-base: "Outfit", sans-serif;
    
@@ -76,13 +85,13 @@ section{
     
 }
 .preparation{
-    background-color: var(--Rose-White-neutral);
+    background-color: var(--ForestGreen);
     margin-top:40px ;
     padding-left:30px;
     border-radius: 13px;
 }
 h3{
-    color: var(--Raspberry-primary);
+    color: var(--DarkGreen);
     font-size:20px ;
 }
 .Ingredients li::marker{
@@ -92,7 +101,7 @@ h3{
     font-weight: var(--fw-bold);
 }
 .preparation li::marker {
-    color: var(--Raspberry-primary);
+    color: var(--LightYellow);
 }
 .li ul li, ol li{
     padding-left: 10px;
