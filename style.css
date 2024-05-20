@@ -7,7 +7,6 @@
 --Eggshell-neutral: hsl(30, 54%, 90%);
 --Light-Grey-neutral: hsl(30, 18%, 87%);
 --Brown-neutral: hsl(30, 10%, 34%);
---DarkCharcoal-neutral: hsl(24, 5%, 18%);
 
 --ForestGreen: hsl(138, 100%, 25%);
 --LightYellow: hsl(67, 100%, 87%);
@@ -61,10 +60,7 @@ h1{
     font-size: 40px;
 }
 
-h2{
-  color: var(--Nutmeg-primary);  
-  font-family: var(--ff-top);
-}
+
 p, h3, li, table{
     font-family: var(--ff-base);
     font-size: 16px;
@@ -94,13 +90,8 @@ h3{
     color: var(--DarkGreen);
     font-size:20px ;
 }
-.Ingredients li::marker{
-    font-weight: var(--fw-regular);
-}
-.Instructions li::marker{
-    font-weight: var(--fw-bold);
-}
-.preparation li::marker {
+
+.aboutUs li::marker {
     color: var(--LightYellow);
 }
 .li ul li, ol li{
@@ -137,35 +128,4 @@ td{
         margin: 6.625em 8.375em 4.625em 8.375em;
     }
 }
-/* Media query for iPad Mini */
-@media (max-width: 768px) {
-    .menu {
-        padding: 20px;
-        margin: 50px 19px;
-    }
-}
 
-/* Media query for mobile design */
-@media (max-width: 480px) {
-    .menu {
-        padding: 15px;
-        margin: 20px 10px;
-    }
-    h1 {
-        font-size: 32px;
-        margin: 20px 0 15px 0;
-    }
-    h3 {
-        font-size: 18px;
-    }
-    p, li, table {
-        font-size: 14px;
-    }
-    table {
-        width: 100%;
-        padding-left: 0;
-    }
-    td {
-        padding: 0.5em;
-    }
-}
