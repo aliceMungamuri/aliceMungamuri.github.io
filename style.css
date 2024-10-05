@@ -1,57 +1,120 @@
-:root {
-    --ForestGreen: hsl(138, 100%, 25%);
-    --LightYellow: hsl(67, 100%, 87%);
-    --DarkGreen: hsl(137, 100%, 16%);
-    --White-neutral: hsl(0, 0%, 100%);
-    --DarkCharcoal-neutral: hsl(24, 5%, 18%);
-    --ff-top: "Young Serif", serif;
-    --ff-base: "Outfit", sans-serif;
-    --fw-regular: 400;
-    --fw-semi-bold: 600;
-    --fw-bold: 700;
+:root{
+
+
+--ForestGreen: hsl(138, 100%, 25%);
+--LightYellow: hsl(67, 100%, 87%);
+--DarkGreen: hsl(137, 100%, 16%);
+--White-neutral: hsl(0, 0%, 100%);
+--DarkCharcoal-neutral: hsl(24, 5%, 18%);
+--Eggshell-neutral: hsl(30, 54%, 90%);
+
+
+
+--ff-top: "Young Serif", serif;
+--ff-base: "Outfit", sans-serif;
+   
+--fw-regular: 400;
+--fw-semi-bold: 600;
+--fw-bold: 700;
 }
 
-* {
-    margin: 0;
-    padding: 0; /* Ensure there's no padding */
-    box-sizing: border-box; /* Makes layout easier */
+*{
+margin: 0;
+box-sizing: border-box;
 }
-
 body {
     font-family: var(--ff-base); /* Base font for the body */
     background: var(--DarkGreen); /* Background color */
     color: var(--White-neutral); /* Text color */
 }
-
-.container {
-    padding: 20px; /* Adds padding around content */
+.container{
+    width: 100%;
+    height: 100%;
 }
 
-/* Heading Styles */
-h1 {
+
+
+
+.menu{
+   background: var(--White-neutral);
+   padding:39.5px ;
+   margin:7.625em 24.375em 6.625em 24.375em;
+   border-radius: 20px;
+}
+
+.attribution{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
     font-family: var(--ff-top);
     font-weight: var(--fw-regular);
     color: var(--DarkCharcoal-neutral);
     margin: 30px 0 19.5px 0;
-    font-size: 40px; /* Heading size */
+    font-size: 40px;
 }
-
-/* General Text Styles */
-p, h3, li {
-    font-family: var(--ff-base);
-    font-size: 16px;
-    color: var(--ForestGreen); /* Text color */
-}
-
-h3 {
-    color: var(--DarkGreen);
-    font-size: 20px; /* Size for h3 */
-}
-
-/* Footer Styles */
 footer {
     text-align: center;
     background-color: var(--DarkCharcoal-neutral); /* Footer color */
     color: var(--White-neutral); /* Footer text color */
     padding: 10px; /* Padding for the footer */
 }
+
+
+p, h3, li, table{
+    font-family: var(--ff-base);
+    font-size: 16px;
+
+}
+p, li{
+    color: var(--ForestGreen);
+}
+span{
+    
+    font-weight: var(--fw-semi-bold);
+}
+p{
+    font-weight: var(--fw-regular);
+}
+section{
+    padding: 15px 0;
+    
+}
+.preparation{
+    background-color: var(--ForestGreen);
+    margin-top:40px ;
+    padding-left:30px;
+    border-radius: 13px;
+}
+h3{
+    color: var(--DarkGreen);
+    font-size:20px ;
+}
+
+.aboutUs li::marker {
+    color: var(--LightYellow);
+}
+.li ul li, ol li{
+    padding-left: 10px;
+}
+.li li{
+    padding-top: 15px;
+}
+.sec li::marker {
+    color: var(--Nutmeg-primary);
+}
+.step{
+    padding-top: .7em;
+}
+
+.left{
+    color: var(--Brown-neutral);
+}
+.right{
+    color: var(--Nutmeg-primary);
+}
+
+
+
