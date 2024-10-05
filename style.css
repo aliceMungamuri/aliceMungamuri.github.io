@@ -22,8 +22,10 @@
 margin: 0;
 box-sizing: border-box;
 }
-body{
-    background:var(--DarkGreen);
+body {
+    font-family: var(--ff-base); /* Base font for the body */
+    background: var(--DarkGreen); /* Background color */
+    color: var(--White-neutral); /* Text color */
 }
 .container{
     width: 100%;
@@ -31,33 +33,6 @@ body{
 }
 
 
-/* Navigation Bar */
-nav {
-    background-color: var(--ForestGreen);
-    padding: 15px;
-    text-align: center; /*center it*/
-}
-
-nav ul {
-    list-style-type: none;/* takes away the def bullets*/
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline-block; /* Aligns the links*/
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: var(--White-neutral); /* White color for the links */
-    text-decoration: none; /* Removes underlines from links */
-    font-size: 18px;
-}
-
-nav ul li a:hover {
-    color: var(--LightYellow); /* Hover effect: change link color */
-}
 
 
 .menu{
@@ -66,10 +41,7 @@ nav ul li a:hover {
    margin:7.625em 24.375em 6.625em 24.375em;
    border-radius: 20px;
 }
-img{
-    width: 100%;
-    border-radius: 13px;
-}
+
 .attribution{
     display: flex;
     justify-content: center;
@@ -82,6 +54,12 @@ h1{
     color: var(--DarkCharcoal-neutral);
     margin: 30px 0 19.5px 0;
     font-size: 40px;
+}
+footer {
+    text-align: center;
+    background-color: var(--DarkCharcoal-neutral); /* Footer color */
+    color: var(--White-neutral); /* Footer text color */
+    padding: 10px; /* Padding for the footer */
 }
 
 
@@ -130,15 +108,7 @@ h3{
 .step{
     padding-top: .7em;
 }
-table{
-width: 39em;
-padding-left:1.6em ;
-border-collapse: collapse;
-}
-td{
-    padding: 1em;
-    border-bottom:1px solid var(--Light-Grey-neutral);
-}
+
 .left{
     color: var(--Brown-neutral);
 }
@@ -146,10 +116,5 @@ td{
     color: var(--Nutmeg-primary);
 }
 
-@media (max-width: 1444px) {
-    .menu {
-        padding: 15px;
-        margin: 6.625em 8.375em 4.625em 8.375em;
-    }
-}
+
 
