@@ -4,7 +4,7 @@ let map;
 // Function to initialize the map
 function initMap() {
     // Set default location and zoom level
-    const City = { lat: 38.960213, lng: -95.277390 }; // Lawrence Kansas
+    const City = { lat: 38.9602, lng: -95.2773 }; // Lawrence Kansas
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10, // the higher the number the closer the map will be as its default
         center: City,
