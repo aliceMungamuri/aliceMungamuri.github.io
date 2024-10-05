@@ -3,31 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>EnviroCache - Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navBar.css">
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="topnav">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a class="active" href="map.html">Map</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Map Content -->
-    <div class="container">
-        <h1>Map</h1>
-        <p>Here you can embed a map to showcase organizations or environmental efforts in your area.</p>
-        <!-- Google Maps iframe or similar embed -->
-        <iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" style="border:0;" allowfullscreen></iframe>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="map.html" class="active">Map</a>
+        <a href="contact.html">Contact</a>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>Coded by Alice Mungamuri</p>
-    </footer>
+    <div id="map" style="height: 500px;"></div>
+
+    <form id="locationForm" onsubmit="return false;">
+        <input type="text" id="locationName" placeholder="Location Name" required>
+        <input type="number" id="litterAmount" placeholder="Amount of Litter" required>
+        <textarea id="litterDescription" placeholder="Description of Litter" required></textarea>
+        <button type="submit" onclick="addMarkerWithDetails()">Add Pin</button>
+    </form>
+
+    <script>
+        let map;
+        let markers = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.397, lng: 150.644 }, // Set your initial map center
+                zoom: 8,
+            });
+
+            map.addListener("click", (event) => {
+                addMarker(event.latLng);
+            });
+        }
+
+        function addMarker(location) {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+            });
+
+            markers.push(marker);
+        }
+
+        function addMarkerWithDetails() {
+            const name = document.getElementById("locationName").value;
+            const amount = document.getElementById("litterAmount").value;
+            const description = document.getElementById("litterDescription").value;
+
+            if (markers.length > 0) {
+                const lastMarker = markers[markers.length - 1]; // Get the last marker placed
+                const location = lastMarker.getPosition();
+
+                // Add marker with user details
+                lastMarker.setTitle(name); // Set the title to the marker
+
+                // Send data to Google Sheets
+                sendDataToGoogleSheets(name, amount, description, location.lat(), location.lng());
+            } else {
+                alert("Please click on the map to place a marker first!");
+            }
+        }
+
+        function sendDataToGoogleSheets(name, amount, description, lat, lng) {
+            const url = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+            const data = {
+                name: name,
+                amount: amount,
+                description: description,
+                latitude: lat,
+                longitude: lng
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert("Data successfully sent to Google Sheets!");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert("Error sending data!");
+            });
+        }
+    </script>
 </body>
 </html>
