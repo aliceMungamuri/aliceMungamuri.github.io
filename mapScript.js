@@ -1,56 +1,88 @@
+// Declare the map variable globally
 let map;
-let markers = [];
 
+// Function to initialize the map
 function initMap() {
+    // Set default location and zoom level
+    const defaultLocation = { lat: 38.8951, lng: -77.0364 }; // Example: Washington, D.C.
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 }, // Set your initial map center
-        zoom: 8,
+        zoom: 12,
+        center: defaultLocation,
     });
 
+    // Add a click event listener to the map
     map.addListener("click", (event) => {
-        addMarker(event.latLng);
+        // Get latitude and longitude from the click event
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+
+        // Prompt user for details to create a marker
+        const name = prompt("Enter the location name:");
+        const amount = prompt("Enter the amount of litter:");
+        const description = prompt("Enter a description of the litter:");
+
+        // Call function to add marker with the gathered information
+        if (name && amount && description) {
+            addMarkerWithDetails(lat, lng, name, amount, description);
+        } else {
+            alert("Please provide all details to add the marker.");
+        }
     });
 }
 
-function addMarker(location) {
+// Function to add a marker with details to the map
+function addMarkerWithDetails(lat, lng, name, amount, description) {
+    // Create a marker at the specified latitude and longitude
     const marker = new google.maps.Marker({
-        position: location,
+        position: { lat: lat, lng: lng },
         map: map,
+        title: name,
     });
 
-    markers.push(marker);
+    // Create an info window to display the litter details
+    const infoWindowContent = `
+        <div>
+            <h3>${name}</h3>
+            <p><strong>Amount of litter:</strong> ${amount}</p>
+            <p><strong>Description:</strong> ${description}</p>
+        </div>
+    `;
+    const infoWindow = new google.maps.InfoWindow({
+        content: infoWindowContent,
+    });
 
-    // Prompt user for details and add to Google Sheets
-    const name = document.getElementById("locationName").value;
-    const amount = document.getElementById("litterAmount").value;
-    const description = document.getElementById("litterDescription").value;
+    // Add click event to the marker to open the info window
+    marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+    });
 
-    // Send data to Google Sheets
-    sendDataToGoogleSheets(name, amount, description, location.lat(), location.lng());
+    // Send the data to Google Sheets (add this function later)
+    sendDataToGoogleSheet(name, amount, description, lat, lng);
 }
 
-function sendDataToGoogleSheets(name, amount, description, lat, lng) {
-    const url = 'https://script.google.com/macros/s/AKfycby7ZzVBoJvGnN46kdGO4qdruQXRESs-QmCvOZKP4PrF9f8uikJwRXHJjOXdAJkt3aFRng/exec';
+// Function to send data to Google Sheets
+function sendDataToGoogleSheet(name, amount, description, lat, lng) {
+    // Here you would make a POST request to your Google Apps Script endpoint
     const data = {
         name: name,
         amount: amount,
         description: description,
         latitude: lat,
-        longitude: lng
+        longitude: lng,
     };
 
-    fetch(url, {
-        method: 'POST',
+    fetch("https://script.google.com/macros/s/AKfycby7ZzVBoJvGnN46kdGO4qdruQXRESs-QmCvOZKP4PrF9f8uikJwRXHJjOXdAJkt3aFRng/exec", {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
     })
     .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+    .then(result => {
+        console.log("Data sent successfully:", result);
     })
-    .catch((error) => {
-        console.error('Error:', error);
+    .catch(error => {
+        console.error("Error sending data:", error);
     });
 }
