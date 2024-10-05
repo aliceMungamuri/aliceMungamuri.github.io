@@ -1,4 +1,5 @@
 let map;
+const scriptURL = 'https://script.google.com/macros/s/AKfycby7ZzVBoJvGnN46kdGO4qdruQXRESs-QmCvOZKP4PrF9f8uikJwRXHJjOXdAJkt3aFRng/exec'; // Your Google Apps Script URL
 
 function initMap() {
     const cityLocation = { lat: 38.9543, lng: -95.2558 }; // Coordinates for Lawrence, Kansas
@@ -17,6 +18,7 @@ function initMap() {
 
         if (name && amount && description) {
             addMarkerWithDetails(lat, lng, name, amount, description);
+            sendDataToGoogleSheets(lat, lng, name, amount, description); // Send data to Google Sheets
         } else {
             alert("Please provide all details to add the marker.");
         }
@@ -37,4 +39,17 @@ function addMarkerWithDetails(lat, lng, name, amount, description) {
     marker.addListener("click", () => {
         infoWindow.open(map, marker);
     });
+}
+
+function sendDataToGoogleSheets(lat, lng, name, amount, description) {
+    const formData = new FormData();
+    formData.append('latitude', lat);
+    formData.append('longitude', lng);
+    formData.append('name', name);
+    formData.append('amount', amount);
+    formData.append('description', description);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => console.log('Data sent successfully!', response))
+        .catch(error => console.error('Error sending data!', error));
 }
